@@ -9,7 +9,7 @@ desktop_path = os.getcwd()
 excel_file_path = "Project_Titan_live_model.xlsx"
 
 if not os.path.exists(excel_file_path):
-    raise FileNotFoundError(f"Could not find your file. Make sure it is saved on your desktop as 'Project_Titan_Live_Model.xlsx'")
+    raise FileNotFoundError(f"Could not find your file. Make sure it is saved on your desktop as 'Project_Titan_live_model.xlsx'")
 
 print("Opening existing raw M&A workbook engine...")
 # Load the workbook while keeping data, charts, and formulas intact
