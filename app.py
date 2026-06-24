@@ -1,13 +1,20 @@
-import streamlit as st 
-import os
+import streamlit as st
+import pandas as pd
 import numpy as np
 import openpyxl
+import os
+# 1. Define the file path
+excel_file_path = "Project_Titan_live_model.xlsx"
+
+# 2. Read the data using your specific sheet name
+df = pd.read_excel(excel_file_path, sheet_name='MA ENGINE')
+
+# 3. Display the UI
+st.title("Project Titan Risk Engine")
+st.write("Current Risk Exposure Data:")
+st.dataframe(df)
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
-
-# 1. PATH DISCOVERY (TARGETING YOUR DESKTOP FILE)
-desktop_path = os.getcwd() 
-excel_file_path = "Project_Titan_live_model.xlsx"
 
 if not os.path.exists(excel_file_path):
     raise FileNotFoundError(f"Could not find your file. Make sure it is saved on your desktop as 'Project_Titan_live_model.xlsx'")
