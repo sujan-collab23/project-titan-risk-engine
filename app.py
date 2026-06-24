@@ -22,7 +22,12 @@ trials = 50000
 
 # Base metrics pulled directly from your sheet inputs
 jpm_base_ni = 57000.00   
-zion_base_ni = 895.00     
+zion_base_ni = 895.00  
+st.success("The Risk Engine has finished processing!")
+st.write("Excel file loaded successfully from:", excel_file_path)
+
+# If you have a dataframe or result variable, show it:
+# st.dataframe(your_dataframe_variable)
 synergies = 501.26        
 debt_drag = -146.81       
 base_case_proforma = jpm_base_ni + zion_base_ni + synergies + debt_drag
@@ -107,3 +112,8 @@ for col in ws2.columns:
 # 4. SAVE UNIFIED DATA AND OVERWRITE ONTO DESKTOP
 wb.save(excel_file_path)
 print(f"\n[SUCCESS] Simulation appended perfectly! Open 'Project_Titan_Live_Model.xlsx' on your desktop to view both tabs.")
+st.success("The Risk Engine has finished processing!")
+st.write("Excel file loaded successfully from:", excel_file_path)
+
+# If you have a dataframe or result variable, show it:
+# st.dataframe(your_dataframe_variable)
