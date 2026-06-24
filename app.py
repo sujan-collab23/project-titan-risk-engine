@@ -6,7 +6,7 @@ from openpyxl.utils import get_column_letter
 
 # 1. PATH DISCOVERY (TARGETING YOUR DESKTOP FILE)
 desktop_path = os.getcwd() 
-excel_file_path = os.path.join(desktop_path, excel_file_path = os.path.join)
+excel_file_path = "Project_Titan_live_model.xlsx"
 
 if not os.path.exists(excel_file_path):
     raise FileNotFoundError(f"Could not find your file. Make sure it is saved on your desktop as 'Project_Titan_Live_Model.xlsx'")
