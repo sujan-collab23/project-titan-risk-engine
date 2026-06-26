@@ -23,6 +23,31 @@ def run_simulation():
 # 3. DASHBOARD UI
 st.title("Project Titan: M&A Strategic Risk Architecture")
 st.markdown("---")
+# 4. REFERENCE DATA PORTAL (The "Excel Thing")
+st.subheader("Reference Data")
+with st.expander("📂 Click to view Raw Model Data (M&A_ENGINE)"):
+    try:
+        # Load the file, setting the first column as the index for a cleaner look
+        df = pd.read_excel("Project_Titan_live_model.xlsx", sheet_name="M&A_ENGINE", header=6)
+        
+        # Display the dataframe with interactive features
+        st.dataframe(
+            df, 
+            use_container_width=True,
+            hide_index=True
+        )
+        
+        # Professional download trigger
+        with open("Project_Titan_live_model.xlsx", "rb") as file:
+            st.download_button(
+                label="📥 Download Master Excel Model",
+                data=file,
+                file_name="Project_Titan_Master_Model.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+            
+    except Exception as e:
+        st.error(f"Data Load Error: {e}")
 
 col1, col2, col3 = st.columns(3)
 
