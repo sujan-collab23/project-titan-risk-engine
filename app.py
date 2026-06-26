@@ -73,12 +73,23 @@ if st.button("Generate Visual Risk Architecture"):
     st.plotly_chart(fig_pie, use_container_width=True)
 
 st.divider()
-
-# 4. REFERENCE DATA PORTAL
+# 4. REFERENCE DATA PORTAL (The "Direct Excel" link)
 st.subheader("Reference Data")
-with st.expander("Click to view Raw Model Data (M&A_ENGINE)"):
+
+# Provide a direct download button that acts as the "Link to Raw Data"
+with open("Project_Titan_live_model.xlsx", "rb") as file:
+    st.download_button(
+        label="🚀 Open/Download Raw Excel Model",
+        data=file,
+        file_name="Project_Titan_Raw_Data.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        help="Click here to download and open the raw Excel file directly."
+    )
+
+# Optional: Keep the preview as a secondary utility
+with st.expander("Or view a preview of the data here"):
     try:
         df = pd.read_excel("Project_Titan_live_model.xlsx", sheet_name="M&A_ENGINE", header=6)
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, use_container_width=True, hide_index=True)
     except Exception as e:
         st.error(f"Data Load Error: {e}")
