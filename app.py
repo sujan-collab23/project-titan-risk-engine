@@ -1,18 +1,26 @@
 import streamlit as st
 import pandas as pd
 
-# 1. Use the EXACT name your debugger found
-SHEET_NAME = "M&A_ENGINE" 
+# Path to the file
+MODEL_PATH = "Project_Titan_live_model.xlsx"
 
+st.subheader("Project Titan: Data Access Portal")
+
+# 1. OPTION A: Interactive Raw Data Table
+# This allows them to see the data directly in the browser
 try:
-    # 2. Skip rows 0-5 so that the real headers (if they exist) 
-    # or the actual data starts at the right place.
-    # You might need to adjust 'header=' depending on which row your 
-    # actual column titles start on.
-    df = pd.read_excel("Project_Titan_live_model.xlsx", sheet_name=SHEET_NAME, header=6)
-    
-    st.success("Successfully loaded 'M&A_ENGINE'!")
-    st.dataframe(df)
-
+    if st.checkbox("Show Raw Data Preview"):
+        df = pd.read_excel(MODEL_PATH, sheet_name="M&A_ENGINE", header=6)
+        st.dataframe(df)
 except Exception as e:
-    st.error(f"Error loading sheet: {e})
+    st.error(f"Could not load data: {e}")
+
+# 2. OPTION B: Direct Download Link
+# This provides a link for the user to download the file
+with open(MODEL_PATH, "rb") as f:
+    st.download_button(
+        label="📥 Download Raw Model File",
+        data=f,
+        file_name="Project_Titan_Raw_Data.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
