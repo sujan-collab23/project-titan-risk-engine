@@ -1,22 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-st.title("Project Titan Debugger")
-
-file_path = "Project_Titan_live_model.xlsx"
+# 1. Use the EXACT name your debugger found
+SHEET_NAME = "M&A_ENGINE" 
 
 try:
-    # 1. Load the Excel file object
-    xls = pd.ExcelFile(file_path)
+    # 2. Skip rows 0-5 so that the real headers (if they exist) 
+    # or the actual data starts at the right place.
+    # You might need to adjust 'header=' depending on which row your 
+    # actual column titles start on.
+    df = pd.read_excel("Project_Titan_live_model.xlsx", sheet_name=SHEET_NAME, header=6)
     
-    # 2. Display all detected sheet names so we can see the real names
-    st.write("Successfully loaded file. Available sheet names are:")
-    st.write(xls.sheet_names)
-    
-    # 3. Try to read using one of the names found
-    # Once you see the output, update this if necessary
-    df = pd.read_excel(file_path, sheet_name=xls.sheet_names[0]) 
+    st.success("Successfully loaded 'M&A_ENGINE'!")
     st.dataframe(df)
 
 except Exception as e:
-    st.error(f"Error: {e}")
+    st.error(f"Error loading sheet: {e})
